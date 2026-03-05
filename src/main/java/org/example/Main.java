@@ -2,12 +2,15 @@ package org.example;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
+import org.example.windows.MainMenuWindow;
 
 import java.awt.*;
 import java.awt.font.TextAttribute;
@@ -17,11 +20,12 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        //setup
         DefaultTerminalFactory factory = new DefaultTerminalFactory();
         factory.setPreferTerminalEmulator(true);
         factory.setTerminalEmulatorTitle("Bank Simulator");
 
-        Font baseFont = new Font("Consolas", Font.PLAIN, 18);
+        Font baseFont = new Font("Cascadia Code", Font.PLAIN, 18);
 
         Map<TextAttribute, Object> attributes = new HashMap<>();
         attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD);
@@ -37,8 +41,9 @@ public class Main {
         screen.startScreen();
 
         MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
-
+        //end setup
         MainMenuWindow mainMenu = new MainMenuWindow(gui);
+        //MessageDialog.showMessageDialog(gui, "Error", "Invalid amount", MessageDialogButton.OK); //nice error
         gui.addWindowAndWait(mainMenu);
 
         screen.stopScreen();
