@@ -9,7 +9,7 @@ import org.example.service.BankService;
 public class MainMenuWindow extends BasicWindow {
     private final MultiWindowTextGUI gui;
 
-    public MainMenuWindow(MultiWindowTextGUI gui) {
+    public MainMenuWindow(MultiWindowTextGUI gui, BankService bankService) {
         super("Bank Simulator - Main Menu");
         this.gui = gui;
 

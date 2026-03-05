@@ -19,37 +19,30 @@ public class CreateUserWindow extends BasicWindow {
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
 
-        // Name
-        panel.addComponent(new Label("Full Name:"));
-        TextBox nameBox = new TextBox(new TerminalSize(30, 1));
-        panel.addComponent(nameBox);
+        panel.addComponent(new Label("First Name:"));
+        TextBox firstNameBox = new TextBox(new TerminalSize(30, 1));
+        panel.addComponent(firstNameBox);
 
-        panel.addComponent(new Label("Email:"));
-        TextBox emailBox = new TextBox(new TerminalSize(30, 1));
-        panel.addComponent(emailBox);
+        panel.addComponent(new Label("Last Name:"));
+        TextBox lastNameBox = new TextBox(new TerminalSize(30, 1));
+        panel.addComponent(lastNameBox);
 
         panel.addComponent(new EmptySpace());
 
         Button confirmButton = new Button("Create User", () -> {
-            String name = nameBox.getText().trim();
-            String email = emailBox.getText().trim();
+            String firstName = firstNameBox.getText().trim();
+            String lastName = lastNameBox.getText().trim();
 
-            if (name.isEmpty()) {
+            if (firstName.isEmpty() || lastName.isEmpty()) {
                 MessageDialog.showMessageDialog(getTextGUI(), "Error",
                         "Full Name is required!", MessageDialogButton.OK);
                 return;
             }
 
-            if(!email.matches(regexEmail)){
-                MessageDialog.showMessageDialog(getTextGUI(), "Error",
-                        "Invalid email format!", MessageDialogButton.OK);
-                return;
-            }
-
-            User user = bankService.createUser(name, email);
+            User user = bankService.createUser(firstName, lastName, 0, "");
 
             MessageDialog.showMessageDialog(getTextGUI(), "Success",
-                    "User created!\nName: " + name,
+                    "User created!\nName: " + firstName + " " + lastName,
                     MessageDialogButton.OK);
 
             close();
