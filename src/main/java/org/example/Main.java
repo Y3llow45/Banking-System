@@ -10,6 +10,8 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
+import org.example.service.BankService;
+import org.example.service.FileStorageService;
 import org.example.windows.MainMenuWindow;
 
 import java.awt.*;
@@ -42,10 +44,16 @@ public class Main {
 
         MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
         //end setup
-        MainMenuWindow mainMenu = new MainMenuWindow(gui);
+        BankService bankService = new BankService();
+        FileStorageService storage = new FileStorageService();
+
+        storage.loadFromFile(bankService);
+
+        MainMenuWindow mainMenu = new MainMenuWindow(gui, bankService);
         //MessageDialog.showMessageDialog(gui, "Error", "Invalid amount", MessageDialogButton.OK); //nice error
         gui.addWindowAndWait(mainMenu);
 
+        storage.saveToFile(bankService);
         screen.stopScreen();
     }
 }
