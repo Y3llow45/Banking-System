@@ -8,10 +8,12 @@ import org.example.service.BankService;
 
 public class MainMenuWindow extends BasicWindow {
     private final MultiWindowTextGUI gui;
+    private final BankService bankService;
 
     public MainMenuWindow(MultiWindowTextGUI gui, BankService bankService) {
         super("Bank Simulator - Main Menu");
         this.gui = gui;
+        this.bankService = bankService;
 
         Panel panel = new Panel();
         panel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
@@ -38,39 +40,37 @@ public class MainMenuWindow extends BasicWindow {
     }
 
     private void openUserCreation() {
-        BankService bankService = new BankService();
         CreateUserWindow createUserWindow = new CreateUserWindow(bankService);
         gui.addWindowAndWait(createUserWindow);
     }
 
     private void openAccountCreation() {
-        BankService bankService = new BankService();
         CreateAccountWindow createAccountWindow = new CreateAccountWindow(bankService);
         gui.addWindowAndWait(createAccountWindow);
     }
 
     private void openDeposit() {
-        DepositWindow depositWindow = new DepositWindow();
+        DepositWindow depositWindow = new DepositWindow(bankService);
         gui.addWindowAndWait(depositWindow);
     }
 
     private void openWithdraw() {
-        WithdrawWindow withdrawWindow = new WithdrawWindow();
+        WithdrawWindow withdrawWindow = new WithdrawWindow(bankService);
         gui.addWindowAndWait(withdrawWindow);
     }
 
     private void openTransfer() {
-        TransferWindow transferWindow = new TransferWindow();
+        TransferWindow transferWindow = new TransferWindow(bankService);
         gui.addWindowAndWait(transferWindow);
     }
 
     private void viewBalance() {
-        // Placeholder: Replace with real logic
+        // asdsad
         MessageDialog.showMessageDialog(gui, "Balance", "Your balance is €1000.00", MessageDialogButton.OK);
     }
 
     private void viewTransactions() {
-        // Placeholder: Replace with real logic
+        // asdsad
         MessageDialog.showMessageDialog(gui, "Transactions", "No transactions yet.", MessageDialogButton.OK);
     }
 }

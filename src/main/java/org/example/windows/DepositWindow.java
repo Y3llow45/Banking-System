@@ -4,9 +4,10 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
+import org.example.service.BankService;
 
 public class DepositWindow extends BasicWindow {
-    public DepositWindow() {
+    public DepositWindow(BankService bankService) {
         super("Deposit Funds");
 
         Panel panel = new Panel();

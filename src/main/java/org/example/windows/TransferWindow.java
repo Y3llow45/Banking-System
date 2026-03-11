@@ -4,9 +4,10 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
+import org.example.service.BankService;
 
 public class TransferWindow extends BasicWindow {
-    public TransferWindow() {
+    public TransferWindow(BankService bankService) {
         super("Transfer Funds");
 
         Panel panel = new Panel();

@@ -4,9 +4,10 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
+import org.example.service.BankService;
 
 public class WithdrawWindow extends BasicWindow {
-    public WithdrawWindow() {
+    public WithdrawWindow(BankService bankService) {
         super("Withdraw Funds");
 
         Panel panel = new Panel();
