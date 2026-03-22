@@ -15,17 +15,28 @@ public class MainMenuWindow extends BasicWindow {
         this.gui = gui;
         this.bankService = bankService;
 
+        rebuildMenu();
+    }
+
+    private void rebuildMenu() {
         Panel panel = new Panel();
         panel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
 
-        Label header = new Label("Welcome to Bank Simulator");
-        header.setForegroundColor(TextColor.ANSI.GREEN);
-        panel.addComponent(header);
+        String welcomeText = bankService.hasUser()
+                ? "Welcome, " + bankService.getOnlyUser().getName()
+                : "Welcome to Bank Simulator";
 
+        Label header = new Label(welcomeText);
+        header.setForegroundColor(TextColor.ANSI.BLUE);
+        panel.addComponent(header);
         panel.addComponent(new EmptySpace());
 
         ActionListBox menu = new ActionListBox();
-        menu.addItem("Create New User", this::openUserCreation);
+
+        if (!bankService.hasUser()) {
+            menu.addItem("Create New User", this::openUserCreation);
+        }
+
         menu.addItem("Open/Create Account", this::openAccountCreation);
         menu.addItem("Deposit", this::openDeposit);
         menu.addItem("Withdraw", this::openWithdraw);
@@ -35,18 +46,21 @@ public class MainMenuWindow extends BasicWindow {
         menu.addItem("Exit", this::close);
 
         panel.addComponent(menu);
-
         setComponent(panel);
     }
 
     private void openUserCreation() {
-        CreateUserWindow createUserWindow = new CreateUserWindow(bankService);
-        gui.addWindowAndWait(createUserWindow);
+        CreateUserWindow win = new CreateUserWindow(bankService, this::refreshAfterUserCreation);
+        gui.addWindowAndWait(win);
+    }
+
+    private void refreshAfterUserCreation(Void unused) {
+        rebuildMenu();
     }
 
     private void openAccountCreation() {
-        CreateAccountWindow createAccountWindow = new CreateAccountWindow(bankService);
-        gui.addWindowAndWait(createAccountWindow);
+        CreateAccountWindow win = new CreateAccountWindow(bankService);
+        gui.addWindowAndWait(win);
     }
 
     private void openDeposit() {

@@ -4,11 +4,7 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
-import org.example.model.Account;
-import org.example.model.User;
 import org.example.service.BankService;
-
-import java.util.List;
 
 public class CreateAccountWindow extends BasicWindow {
 
@@ -21,45 +17,37 @@ public class CreateAccountWindow extends BasicWindow {
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
 
-        panel.addComponent(new Label("Account name:"));
-        TextBox accountBox = new TextBox(new TerminalSize(20, 1));
-        accountBox.setText("name");
+        panel.addComponent(new Label("Account Name:"));
+        TextBox accountBox = new TextBox(new TerminalSize(25, 1));
+        accountBox.setText("My Checking");
         panel.addComponent(accountBox);
 
         panel.addComponent(new Label("Password:"));
-        TextBox passwordBox = new TextBox(new TerminalSize(20, 1));
-        passwordBox.setText("password");
+        TextBox passwordBox = new TextBox(new TerminalSize(25, 1));
+        passwordBox.setText("password123");
         panel.addComponent(passwordBox);
 
         panel.addComponent(new EmptySpace());
 
         Button confirmButton = new Button("Create Account", () -> {
-            /*String accountName = accountBox.getText().trim();
-            System.out.println("Account Name: " + accountName);
-            try {
-                if (accountName.length() > 30 || accountName.length()<3) {
-                    throw new StringFormatException();
-                }
-            } catch (Exception e) {
-                MessageDialog.showMessageDialog(getTextGUI(), "Error",
-                        "Invalid account name! Must be between 3 and 30 characters.",
-                        MessageDialogButton.OK);
-                return;
-            }*/
+            String accountName = accountBox.getText().trim();
+            String password = passwordBox.getText().trim();
 
-            /*bankService.createAccount(accountName, user, passwordBox.getText());
+            if (accountName.length() < 3 || accountName.length() > 30) {
+                MessageDialog.showMessageDialog(getTextGUI(), "Error",
+                        "Account name must be 3-30 characters", MessageDialogButton.OK);
+                return;
+            }
+
+            bankService.createAccount(accountName, password);
 
             MessageDialog.showMessageDialog(getTextGUI(), "Success",
-                    "Account created!\nName: " + accountName + "\nOwner: " + user.getText(),
-                    MessageDialogButton.OK);
-
-            close();*/
+                    "Account created!\nName: " + accountName, MessageDialogButton.OK);
+            close();
         });
 
         panel.addComponent(confirmButton);
-
-        Button cancelButton = new Button("Cancel", this::close);
-        panel.addComponent(cancelButton);
+        panel.addComponent(new Button("Cancel", this::close));
 
         setComponent(panel);
     }

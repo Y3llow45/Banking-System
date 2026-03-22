@@ -10,12 +10,16 @@ import java.util.Map;
 import org.apache.commons.lang.RandomStringUtils;
 
 public class BankService {
+
     private final Map<Long, User> usersById = new HashMap<>();
-    public static final int ID_LENGTH = 10;
 
     public User createUser(String firstName, String lastName, int age, String email) {
+        if (!usersById.isEmpty()) {
+            throw new IllegalStateException("Only one user is allowed in this app");
+        }
+
         User user = new User();
-        user.setId(Long.parseLong(RandomStringUtils.randomNumeric(ID_LENGTH)));
+        user.setId(Long.parseLong(RandomStringUtils.randomNumeric(10)));
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setAge(age);
@@ -25,26 +29,30 @@ public class BankService {
         return user;
     }
 
-    public void addUser(User user) {
-        usersById.put(user.getId(), user);
+    public boolean hasUser() {
+        return !usersById.isEmpty();
+    }
+
+    public User getOnlyUser() {
+        return usersById.isEmpty() ? null : usersById.values().iterator().next();
     }
 
     public List<User> getAllUsers() {
         return new ArrayList<>(usersById.values());
     }
 
-    public User findUserById(Long id) {
-        return usersById.get(id);
+    public void addUser(User user) {
+        usersById.put(user.getId(), user);
     }
 
-    public Account createAccount(String accountName, User selectedUser, String password) {
-        if (selectedUser == null) {
-            throw new IllegalArgumentException("User cannot be null");
+    public Account createAccount(String accountName, String password) {
+        User user = getOnlyUser();
+        if (user == null) {
+            throw new IllegalStateException("Create a user first");
         }
 
-        Account newAccount = new Account(accountName, selectedUser, password);
-        // Set ID, type, balance etc. as needed
-        selectedUser.getAccounts().add(newAccount);
+        Account newAccount = new Account(accountName, user, password);
+        user.getAccounts().add(newAccount);
         return newAccount;
     }
 }

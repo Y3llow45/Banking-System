@@ -4,17 +4,19 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
-import org.example.model.User;
 import org.example.service.BankService;
+
+import java.util.function.Consumer;
 
 public class CreateUserWindow extends BasicWindow {
 
-    private final BankService bankService;
-    private final String regexEmail = "[A-z, \\d]{2,64}@[a-z]{2,63}\\.[a-z]{2,63}";
+    public final BankService bankService;
+    private final Consumer<Void> onUserCreated;
 
-    public CreateUserWindow(BankService bankService) {
+    public CreateUserWindow(BankService bankService, Consumer<Void> onUserCreated) {
         super("Create New User");
         this.bankService = bankService;
+        this.onUserCreated = onUserCreated;
 
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
@@ -39,13 +41,14 @@ public class CreateUserWindow extends BasicWindow {
                 return;
             }
 
-            User user = bankService.createUser(firstName, lastName, 0, "");
+            bankService.createUser(firstName, lastName, 0, "");
 
             MessageDialog.showMessageDialog(getTextGUI(), "Success",
                     "User created!\nName: " + firstName + " " + lastName,
                     MessageDialogButton.OK);
 
             close();
+            onUserCreated.accept(null);
         });
 
         panel.addComponent(confirmButton);

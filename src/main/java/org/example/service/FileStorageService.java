@@ -25,12 +25,12 @@ public class FileStorageService {
     public void saveToFile(BankService bankService) {
         BankData data = new BankData();
         data.setUsers(bankService.getAllUsers());
-        System.out.println("Saving " + data + " users to file.");
+        System.out.println("Saving " + data.getUsers().size() + " users to file (bankService@" + System.identityHashCode(bankService) + ").");
         String json = gson.toJson(data);
 
         try (Writer writer = new FileWriter(FILE_PATH)) {
             writer.write(json);
-            System.out.println("Data saved to " + FILE_PATH);
+            System.out.println("Data successfully saved to " + FILE_PATH);
         } catch (IOException e) {
             System.err.println("Failed to save data: " + e.getMessage());
         }
