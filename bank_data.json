@@ -1,3 +1,19 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": 995643413,
+      "firstName": "asd",
+      "lastName": "asd",
+      "age": 0,
+      "accounts": [
+        {
+          "accountId": 1774195436762,
+          "accountName": "Primary",
+          "balance": 200.0,
+          "password": "1234",
+          "transactions": []
+        }
+      ]
+    }
+  ]
 }

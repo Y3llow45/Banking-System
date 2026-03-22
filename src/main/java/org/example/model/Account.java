@@ -1,13 +1,17 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
     private Long accountId;
     private String accountName;
     private BigDecimal balance;
-    private User owner;
+
+    private transient User owner;
     private String password;
     private List<Transaction> transactions;
 
@@ -17,7 +21,7 @@ public class Account {
         this.password = password;
         this.balance = BigDecimal.valueOf(200.00);
         this.owner = owner;
-        this.transactions = null;
+        this.transactions = new ArrayList<>();
     }
 
     public String getAccountId() {
