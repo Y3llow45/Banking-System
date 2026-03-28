@@ -5,15 +5,18 @@ import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
 import org.example.service.BankService;
+import org.example.service.FileStorageService;
 
 public class MainMenuWindow extends BasicWindow {
     private final MultiWindowTextGUI gui;
     private final BankService bankService;
+    private final FileStorageService fileStorageService;
 
-    public MainMenuWindow(MultiWindowTextGUI gui, BankService bankService) {
+    public MainMenuWindow(MultiWindowTextGUI gui, BankService bankService, FileStorageService fileStorageService) {
         super("Bank Simulator - Main Menu");
         this.gui = gui;
         this.bankService = bankService;
+        this.fileStorageService = fileStorageService;
 
         rebuildMenu();
     }
@@ -64,7 +67,7 @@ public class MainMenuWindow extends BasicWindow {
     }
 
     private void openDeposit() {
-        DepositWindow depositWindow = new DepositWindow(bankService);
+        DepositWindow depositWindow = new DepositWindow(bankService, fileStorageService);
         gui.addWindowAndWait(depositWindow);
     }
 

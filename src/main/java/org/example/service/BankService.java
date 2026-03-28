@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.model.Account;
 import org.example.model.User;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,5 +55,21 @@ public class BankService {
         Account newAccount = new Account(accountName, user, password);
         user.getAccounts().add(newAccount);
         return newAccount;
+    }
+
+    public List<Account> getAllAccounts() {
+        User user = getOnlyUser();
+        return user != null ? user.getAccounts() : new ArrayList<>();
+    }
+
+    public void deposit(Account account, BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) throw new IllegalArgumentException("Amount must be positive");
+        account.setBalance(account.getBalance().add(amount));
+    }
+
+    public void withdraw(Account account, BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) throw new IllegalArgumentException("Amount must be positive");
+        if (account.getBalance().compareTo(amount) < 0) throw new IllegalArgumentException("Insufficient funds");
+        account.setBalance(account.getBalance().subtract(amount));
     }
 }

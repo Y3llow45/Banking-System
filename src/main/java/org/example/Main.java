@@ -49,7 +49,7 @@ public class Main {
 
         storage.loadFromFile(bankService);
 
-        MainMenuWindow mainMenu = new MainMenuWindow(gui, bankService);
+        MainMenuWindow mainMenu = new MainMenuWindow(gui, bankService, storage);
         //MessageDialog.showMessageDialog(gui, "Error", "Invalid amount", MessageDialogButton.OK); //nice error
         gui.addWindowAndWait(mainMenu);
 
