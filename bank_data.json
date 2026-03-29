@@ -9,7 +9,14 @@
         {
           "accountId": 1774195436762,
           "accountName": "Primary",
-          "balance": 400.00,
+          "balance": 300.00,
+          "password": "1234",
+          "transactions": []
+        },
+        {
+          "accountId": 1774735108626,
+          "accountName": "Kid\u0027s account",
+          "balance": 650.00,
           "password": "1234",
           "transactions": []
         }

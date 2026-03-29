@@ -72,7 +72,7 @@ public class MainMenuWindow extends BasicWindow {
     }
 
     private void openWithdraw() {
-        WithdrawWindow withdrawWindow = new WithdrawWindow(bankService);
+        WithdrawWindow withdrawWindow = new WithdrawWindow(bankService, fileStorageService);
         gui.addWindowAndWait(withdrawWindow);
     }
 
