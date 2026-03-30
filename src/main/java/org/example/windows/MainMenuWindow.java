@@ -77,7 +77,7 @@ public class MainMenuWindow extends BasicWindow {
     }
 
     private void openTransfer() {
-        TransferWindow transferWindow = new TransferWindow(bankService);
+        TransferWindow transferWindow = new TransferWindow(bankService, fileStorageService);
         gui.addWindowAndWait(transferWindow);
     }
 
