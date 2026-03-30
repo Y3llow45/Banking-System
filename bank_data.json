@@ -9,16 +9,46 @@
         {
           "accountId": 1774195436762,
           "accountName": "Primary",
-          "balance": 600.00,
+          "balance": 550.00,
           "password": "1234",
-          "transactions": []
+          "transactions": [
+            {
+              "id": 1774893030807,
+              "amount": 550.00,
+              "type": "DEPOSIT",
+              "description": "Deposit to account",
+              "timestamp": "2026-03-30T20:50:30.8194079"
+            },
+            {
+              "id": 1774893050659,
+              "amount": 50.00,
+              "type": "TRANSFER_OUT",
+              "description": "To Kid\u0027s account",
+              "timestamp": "2026-03-30T20:50:50.6596936"
+            },
+            {
+              "id": 1774893078200,
+              "amount": 550.00,
+              "type": "WITHDRAW",
+              "description": "Withdrawal from account",
+              "timestamp": "2026-03-30T20:51:18.2006926"
+            }
+          ]
         },
         {
           "accountId": 1774735108626,
           "accountName": "Kid\u0027s account",
-          "balance": 550.00,
+          "balance": 600.00,
           "password": "1234",
-          "transactions": []
+          "transactions": [
+            {
+              "id": 1774893050659,
+              "amount": 50.00,
+              "type": "TRANSFER_IN",
+              "description": "From Primary",
+              "timestamp": "2026-03-30T20:50:50.6596936"
+            }
+          ]
         }
       ]
     }

@@ -11,7 +11,7 @@ public class Account {
 
     private transient User owner;
     private String password;
-    private List<Transaction> transactions;
+    private List<Transaction> transactions = new ArrayList<>();
 
     public Account(String accountName, User owner, String password) {
         this.accountId = System.currentTimeMillis();
