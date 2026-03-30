@@ -82,12 +82,12 @@ public class MainMenuWindow extends BasicWindow {
     }
 
     private void viewBalance() {
-        // asdsad
-        MessageDialog.showMessageDialog(gui, "Balance", "Your balance is €1000.00", MessageDialogButton.OK);
+        ViewBalanceWindow win = new ViewBalanceWindow(bankService);
+        gui.addWindowAndWait(win);
     }
 
     private void viewTransactions() {
-        // asdsad
-        MessageDialog.showMessageDialog(gui, "Transactions", "No transactions yet.", MessageDialogButton.OK);
+        ViewTransactionsWindow win = new ViewTransactionsWindow(bankService);
+        gui.addWindowAndWait(win);
     }
 }
