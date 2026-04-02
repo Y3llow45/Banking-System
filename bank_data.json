@@ -9,7 +9,7 @@
         {
           "accountId": 1774195436762,
           "accountName": "Primary",
-          "balance": 550.00,
+          "balance": 5020.00,
           "password": "1234",
           "transactions": [
             {
@@ -32,6 +32,20 @@
               "type": "WITHDRAW",
               "description": "Withdrawal from account",
               "timestamp": "2026-03-30T20:51:18.2006926"
+            },
+            {
+              "id": 1775159473945,
+              "amount": 5000.00,
+              "type": "DEPOSIT",
+              "description": "Deposit to account",
+              "timestamp": "2026-04-02T22:51:13.9570418"
+            },
+            {
+              "id": 1775159513631,
+              "amount": 530.00,
+              "type": "TRANSFER_OUT",
+              "description": "To Savings account",
+              "timestamp": "2026-04-02T22:51:53.6318494"
             }
           ]
         },
@@ -47,6 +61,21 @@
               "type": "TRANSFER_IN",
               "description": "From Primary",
               "timestamp": "2026-03-30T20:50:50.6596936"
+            }
+          ]
+        },
+        {
+          "accountId": 1775159379473,
+          "accountName": "Savings account",
+          "balance": 730.00,
+          "password": "gjeij*#$8uhj3f",
+          "transactions": [
+            {
+              "id": 1775159513631,
+              "amount": 530.00,
+              "type": "TRANSFER_IN",
+              "description": "From Primary",
+              "timestamp": "2026-04-02T22:51:53.6318494"
             }
           ]
         }
